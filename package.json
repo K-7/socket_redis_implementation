@@ -1,0 +1,29 @@
+{
+  "name": "socket_redis",
+  "version": "1.0.0",
+  "description": "redis as cache over sockets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rkbansal/socket_redis_implementation.git"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "redis": "^2.8.0",
+    "socket.io": "^2.2.0"
+  },
+  "keywords": [
+    "socket",
+    "redis",
+    "node"
+  ],
+  "author": "raj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rkbansal/socket_redis_implementation/issues"
+  },
+  "homepage": "https://github.com/rkbansal/socket_redis_implementation#readme"
+}

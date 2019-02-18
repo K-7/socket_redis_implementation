@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+    <input id="input_id" type="text"/>
+    <button id="get" onclick="getData()">Get Data Socket</button>
+    <button id="get" onclick="setData()">Set Data Socket</button>
+    <button id="get" onclick="getDataHTTP()">Get Data HTTP</button>
+    <script src="socket.io.js"></script>
+    <script>
+      const url = 'http://xx.xxx.xxx.xxx:port'; // your server ip
+      var socket = io.connect(url);
+      function getData(){
+        let d = new Date();
+        console.log(d+' '+d.getMilliseconds());
+        socket.emit('get', document.getElementById('input_id').value);
+      }
+
+      function setData(){
+        socket.emit('set', "Condition_1234", {'name':'raj', 'age': 24})
+      };
+
+      function getDataHTTP(){
+        let id = document.getElementById('input_id').value;
+        let d = new Date();
+        console.log(d+' '+d.getMilliseconds());
+        fetch(url+'/value/'+id).then(response=>{
+          return response.json();
+        }).then(response=>{
+          let d = new Date();
+        console.log(d+' '+d.getMilliseconds());
+          console.log(response);
+        }).catch(err=>{
+          console.log(err);
+        });
+      };
+
+      socket.on('get', function(data){
+        let d = new Date();
+        console.log(d+' '+d.getMilliseconds());
+        console.log(JSON.parse(data.value));
+      });
+    </script>
+  </body>
+</html>
